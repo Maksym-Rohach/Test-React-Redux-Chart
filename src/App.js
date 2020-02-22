@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense, Component } from 'react';
+import { Route, Switch } from "react-router";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const AdminLayout = React.lazy(() => import("./layout/AdminLayout"))
+const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
+class App extends Component {
 
+  state = {
+    isLoading: false,
+    isError: false
+  }
+
+  componentDidMount() {
+
+  }
+
+  render() {
+
+  
+    return (
+
+      <Suspense fallback={ <div>Загрузка...</div> }>
+        <Switch>
+          <Route path="/admin" name="Admin" render={ props => <AdminLayout { ...props } /> } />
+
+          <Route path="/" name="Default"
+            render={ props => <AdminLayout { ...props } /> } />
+
+        </Switch>
+      </Suspense>
+    );
+  }
+};
 export default App;
