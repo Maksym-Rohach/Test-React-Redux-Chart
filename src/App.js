@@ -1,8 +1,9 @@
 import React, { Suspense, Component } from 'react';
-import { Route, Switch } from "react-router";
+import { Route, Switch, Redirect } from "react-router";
+import './App.scss';
 
 const AdminLayout = React.lazy(() => import("./layout/AdminLayout"))
-const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
+//const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
 class App extends Component {
 
   state = {
@@ -22,9 +23,7 @@ class App extends Component {
       <Suspense fallback={ <div>Загрузка...</div> }>
         <Switch>
           <Route path="/admin" name="Admin" render={ props => <AdminLayout { ...props } /> } />
-
-          <Route path="/" name="Default"
-            render={ props => <AdminLayout { ...props } /> } />
+          <Redirect from="/" to="/admin/persons" />
 
         </Switch>
       </Suspense>

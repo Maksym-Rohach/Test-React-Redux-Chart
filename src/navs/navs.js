@@ -1,6 +1,5 @@
-import PersonsChart from "./views/PersonsChart/PersonsChart.jsx";
-import Comments from "./views/CommentsChart.jsx";
-
+import PersonsChart from "../views/PersonsChart/PersonsChart.jsx";
+import Comments from "../views/CommentsChart/CommentsChart.jsx"
 var routes = [
   {
     path: "/persons",
@@ -12,7 +11,6 @@ var routes = [
   {
     path: "/comments",
     name: "Comments",
-    rtlName: "الرموز",
     icon: "tim-icons icon-atom",
     component: Comments,
     layout: "/admin"
