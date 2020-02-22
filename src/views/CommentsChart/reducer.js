@@ -14,14 +14,14 @@ const initialState = {
     },   
 }
 
-export const getCommentsData = (model) => {
-    console.log("+++++++++++Response");
+export const getCommentsData = () => {
     return (dispatch) => {
         dispatch(getListActions.started());
-        CommentsChartService.getComments(model)
+        console.log("getCommentsData");
+        CommentsChartService.getComments()
             .then((response) => {
-                console.log("+++++++++++Response", response);
-                dispatch(getListActions.success(response.data));               
+                console.log("Promise+++++++++++Response", response);
+                dispatch(getListActions.success(response));               
             }, err=> { throw err; })
             .catch(err=> {
                 console.log("+++++++++++catch");

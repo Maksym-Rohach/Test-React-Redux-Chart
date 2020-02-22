@@ -124,6 +124,30 @@ class PersonsChart extends React.Component {
             "SEP",
             "OCT",
             "NOV",
+            "DEC",
+            "JAN",
+            "FEB",
+            "MAR",
+            "APR",
+            "MAY",
+            "JUN",
+            "JUL",
+            "AUG",
+            "SEP",
+            "OCT",
+            "NOV",
+            "DEC",
+            "JAN",
+            "FEB",
+            "MAR",
+            "APR",
+            "MAY",
+            "JUN",
+            "JUL",
+            "AUG",
+            "SEP",
+            "OCT",
+            "NOV",
             "DEC"
           ],
           datasets: [
@@ -159,8 +183,8 @@ class PersonsChart extends React.Component {
                 <CardHeader>
                   <Row>
                     <Col className="text-left" sm="6">
-                      <h5 className="card-category">Реєстрація</h5>
-                      <CardTitle tag="h2">Графік</CardTitle>
+                      <h5 className="card-category">Chart</h5>
+                      <CardTitle tag="h2">Persons</CardTitle>
                     </Col>                 
                     <Col sm="6">
                       <ButtonGroup
@@ -184,7 +208,7 @@ class PersonsChart extends React.Component {
                             type="radio"
                           />
                           <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                            Реєстрації
+                          Generate data
                           </span>
                           <span className="d-block d-sm-none">
                             <i className="tim-icons icon-single-02" />
@@ -206,8 +230,7 @@ class PersonsChart extends React.Component {
             </Col>
           </Row>
           </div>
-        </React.Fragment>
-          
+        </React.Fragment>        
           );
   }
 }
@@ -215,8 +238,8 @@ class PersonsChart extends React.Component {
 const mapStateToProps = state => {
   console.log("State=======", state);
   return {
-    listData: get(state, "registryShedule.list.data"),
-    isListLoading: get(state, "registryShedule.list.loading"),  
+    listData: get(state, "person.list.data"),
+    isListLoading: get(state, "person.list.loading"),  
   };
 }
 

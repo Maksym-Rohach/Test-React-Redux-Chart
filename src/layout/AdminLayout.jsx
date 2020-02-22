@@ -3,10 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import PerfectScrollbar from "perfect-scrollbar";
 import AdminNavbar from "../components/AdminNavbar";
 import AdminSideBar from "../components/Sidebar";
-import { Container, Row } from 'reactstrap';
-import { connect } from 'react-redux';
 import routes from "../routes/adminRoutes";
-import PropTypes from 'prop-types';
 
 var ps;
 
@@ -100,6 +97,7 @@ class AdminLayout extends React.Component {
     );
   }
 }
+
 
 //export default connect(AdminLayout);
 export default AdminLayout;

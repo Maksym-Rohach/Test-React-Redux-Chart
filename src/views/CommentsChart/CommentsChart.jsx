@@ -73,7 +73,9 @@ class CommentsChart extends React.Component {
     this.state = {
       bigChartData: "data1",
       isLoading: true,
-      tmp_year: { value: '2020', label: '2020р' },   
+      tmp_year: { value: '2020', label: '2020р' },  
+      datesState: [],
+      commentsState: []
     };
   }
 
@@ -82,25 +84,20 @@ class CommentsChart extends React.Component {
       bigChartData: name
     });
   };
-
-  handleChange = (name, selectValue) => {
-    this.setState({ [name]: selectValue }, this.filterSearchData);
+  
+  generateData =()=> {
+      this.props.getCommentsData();
   }
 
-  filterSearchData = () => {
-    const { tmp_year } = this.state;
-    let year = tmp_year.value;
-    this.props.getCommentsData({ year });
+  static getDerivedStateFromProps(nextProps, prevState){
+    return {
+      datesState: nextProps.date,
+      commentsState: nextProps.comments
+    };
   }
-
-  componentDidMount = () => {
-    const { tmp_year } = this.state;
-    let year = tmp_year.value;
-    this.props.getCommentsData({ year });
-  }
-
 
   render() {
+    const { datesState, commentsState } = this.state;
     let chartExample1 = {
       data1: canvas => {
         let ctx = canvas.getContext("2d");
@@ -111,24 +108,11 @@ class CommentsChart extends React.Component {
         gradientStroke.addColorStop(0.4, "rgba(29,140,248,0.0)");
         gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
     
-        return {
-          labels: [
-            "JAN",
-            "FEB",
-            "MAR",
-            "APR",
-            "MAY",
-            "JUN",
-            "JUL",
-            "AUG",
-            "SEP",
-            "OCT",
-            "NOV",
-            "DEC"
-          ],
+        return {        
+          labels: datesState,
           datasets: [
             {
-              label: "My First dataset",
+              label: "Comments",
               fill: true,
               backgroundColor: gradientStroke,
               borderColor: "#1f8ef1",
@@ -142,7 +126,7 @@ class CommentsChart extends React.Component {
               pointHoverRadius: 4,
               pointHoverBorderWidth: 15,
               pointRadius: 4,
-              data:this.props.listData
+              data: commentsState
             }
           ]
         };
@@ -159,8 +143,8 @@ class CommentsChart extends React.Component {
                 <CardHeader>
                   <Row>
                     <Col className="text-left" sm="6">
-                      <h5 className="card-category">Реєстрація</h5>
-                      <CardTitle tag="h2">Графік</CardTitle>
+                      <h5 className="card-category">Chart</h5>
+                      <CardTitle tag="h2">Comments</CardTitle>
                     </Col>                 
                     <Col sm="6">
                       <ButtonGroup
@@ -183,8 +167,9 @@ class CommentsChart extends React.Component {
                             name="options"
                             type="radio"
                           />
-                          <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                            Реєстрації
+                          <span
+                          onClick={this.generateData}>
+                          Generate data
                           </span>
                           <span className="d-block d-sm-none">
                             <i className="tim-icons icon-single-02" />
@@ -214,8 +199,9 @@ class CommentsChart extends React.Component {
 const mapStateToProps = state => {
   console.log("State=======", state);
   return {
-    listData: get(state, "registryShedule.list.data"),
-    isListLoading: get(state, "registryShedule.list.loading"),  
+    comments: get(state, "comments.list.data.comment"),
+    date: get(state, "comments.list.data.date"),
+    isListLoading: get(state, "comments.list.loading"),  
   };
 }
 
