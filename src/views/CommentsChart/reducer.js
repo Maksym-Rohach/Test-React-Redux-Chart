@@ -17,15 +17,12 @@ const initialState = {
 export const getCommentsData = () => {
     return (dispatch) => {
         dispatch(getListActions.started());
-        console.log("getCommentsData");
         CommentsChartService.getComments()
-            .then((response) => {
-                console.log("Promise+++++++++++Response", response);
+            .then((response) => {            
                 dispatch(getListActions.success(response));               
             }, err=> { throw err; })
             .catch(err=> {
-                console.log("+++++++++++catch");
-              dispatch(getListActions.failed(err.response));
+              dispatch(getListActions.failed(err));
             });
     }
 }
@@ -37,17 +34,15 @@ export const getListActions = {
         }
     },  
     success: (data) => {
-        console.log("+++++++++++Data", data);
         return {
             type: COMMENTS_SUCCESS,
             payload: data
         }
     },  
-    failed: (response) => {
-        console.log("failed: (response)", response);
+    failed: (error) => {
         return {           
             type: COMMENTS_FAILED,
-            //errors: response.data
+            error: error,
         }
     }
   }
@@ -67,9 +62,7 @@ export const commentsChartReducer = (state = initialState, action) => {
           newState = update.set(state, 'list.loading', false);
           newState = update.set(newState, 'list.failed', false);
           newState = update.set(newState, 'list.success', true);
-          newState = update.set(newState, 'list.data', action.payload);
-          console.log("REGISTER_SHEDULE_SUCCESS)", action.payload);
-
+          newState = update.set(newState, 'list.data', action.payload);         
           break;
       }
       case COMMENTS_FAILED: {

@@ -13,7 +13,7 @@ export const history = createBrowserHistory({ basename: baseUrl });
 
 export default function configureStore(history, initialState) {
   const reducers = {
-    person: personsChartReducer,
+    persons: personsChartReducer,
     comments: commentsChartReducer
   };
 

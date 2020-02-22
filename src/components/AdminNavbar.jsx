@@ -67,7 +67,7 @@ class AdminNavbar extends React.Component {
   };
   render() {
     return (
-      <>
+      <React.Fragment>
         <Navbar
           className={classNames("navbar-absolute", this.state.color)}
           expand="lg"
@@ -89,7 +89,7 @@ class AdminNavbar extends React.Component {
                   <span className="navbar-toggler-bar bar3" />
                 </button>
               </div>
-              <NavbarBrand href="#pablo" onClick={e => e.preventDefault()}>
+              <NavbarBrand className="mt-lg-4" href="#pablo" onClick={e => e.preventDefault()}>
                 {this.props.brandText}
               </NavbarBrand>
             </div>
@@ -108,60 +108,9 @@ class AdminNavbar extends React.Component {
               <span className="navbar-toggler-bar navbar-kebab" />
             </button>
             <Collapse navbar isOpen={this.state.collapseOpen}>
-              <Nav className="ml-auto" navbar>
-                <InputGroup className="search-bar">
-                  <Button
-                    color="link"
-                    data-target="#searchModal"
-                    data-toggle="modal"
-                    id="search-button"
-                    onClick={this.toggleModalSearch}
-                  >
-                    <i className="tim-icons icon-zoom-split" />
-                    <span className="d-lg-none d-md-block">Search</span>
-                  </Button>
-                </InputGroup>
+               <Nav className="ml-auto" navbar>              
                 <UncontrolledDropdown nav>
-                  <DropdownToggle
-                    caret
-                    color="default"
-                    data-toggle="dropdown"
-                    nav
-                  >
-                    <div className="notification d-none d-lg-block d-xl-block" />
-                    <i className="tim-icons icon-sound-wave" />
-                    <p className="d-lg-none">Notifications</p>
-                  </DropdownToggle>
-                  <DropdownMenu className="dropdown-navbar" right tag="ul">
-                    <NavLink tag="li">
-                      <DropdownItem className="nav-item">
-                        Mike John responded to your email
-                      </DropdownItem>
-                    </NavLink>
-                    <NavLink tag="li">
-                      <DropdownItem className="nav-item">
-                        You have 5 more tasks
-                      </DropdownItem>
-                    </NavLink>
-                    <NavLink tag="li">
-                      <DropdownItem className="nav-item">
-                        Your friend Michael is in town
-                      </DropdownItem>
-                    </NavLink>
-                    <NavLink tag="li">
-                      <DropdownItem className="nav-item">
-                        Another notification
-                      </DropdownItem>
-                    </NavLink>
-                    <NavLink tag="li">
-                      <DropdownItem className="nav-item">
-                        Another one
-                      </DropdownItem>
-                    </NavLink>
-                  </DropdownMenu>
-                </UncontrolledDropdown>
-                <UncontrolledDropdown nav>
-                  <DropdownToggle
+                  {/* <DropdownToggle
                     caret
                     color="default"
                     data-toggle="dropdown"
@@ -169,7 +118,7 @@ class AdminNavbar extends React.Component {
                     onClick={e => e.preventDefault()}
                   >
                     <div className="photo">
-                      {/* <img alt="..." src={require("assets/img/anime3.png")} /> */}
+                     
                     </div>
                     <b className="caret d-none d-lg-block d-xl-block" />
                     <p className="d-lg-none">Log out</p>
@@ -185,10 +134,10 @@ class AdminNavbar extends React.Component {
                     <NavLink tag="li">
                       <DropdownItem className="nav-item">Log out</DropdownItem>
                     </NavLink>
-                  </DropdownMenu>
+                  </DropdownMenu> */}
                 </UncontrolledDropdown>
                 <li className="separator d-lg-none" />
-              </Nav>
+              </Nav> 
             </Collapse>
           </Container>
         </Navbar>
@@ -210,7 +159,7 @@ class AdminNavbar extends React.Component {
             </button>
           </div>
         </Modal>
-      </>
+      </React.Fragment>
     );
   }
 }

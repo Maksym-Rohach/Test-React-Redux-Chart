@@ -72,10 +72,10 @@ class CommentsChart extends React.Component {
     super(props);
     this.state = {
       bigChartData: "data1",
-      isLoading: true,
-      tmp_year: { value: '2020', label: '2020р' },  
+      isLoading: true, 
       datesState: [],
-      commentsState: []
+      commentsState: [],
+      size: 0
     };
   }
 
@@ -92,12 +92,14 @@ class CommentsChart extends React.Component {
   static getDerivedStateFromProps(nextProps, prevState){
     return {
       datesState: nextProps.date,
-      commentsState: nextProps.comments
+      commentsState: nextProps.comments,
+      size: nextProps.size
     };
   }
 
   render() {
-    const { datesState, commentsState } = this.state;
+    const { datesState, commentsState, size } = this.state;
+    
     let chartExample1 = {
       data1: canvas => {
         let ctx = canvas.getContext("2d");
@@ -142,10 +144,13 @@ class CommentsChart extends React.Component {
               <Card className="card-chart">
                 <CardHeader>
                   <Row>
-                    <Col className="text-left" sm="6">
-                      <h5 className="card-category">Chart</h5>
-                      <CardTitle tag="h2">Comments</CardTitle>
-                    </Col>                 
+                  <Col className="text-left" sm="6">
+                    <CardTitle tag="h2" className="text-info">Comments</CardTitle>
+                    <CardTitle tag="h3">
+                    <i className="tim-icons icon-bell-55 text-info" />{" "}
+                    {size}
+                  </CardTitle>
+                  </Col>        
                     <Col sm="6">
                       <ButtonGroup
                         className="btn-group-toggle float-right"
@@ -197,10 +202,10 @@ class CommentsChart extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log("State=======", state);
   return {
     comments: get(state, "comments.list.data.comment"),
     date: get(state, "comments.list.data.date"),
+    size: get(state, "comments.list.data.size"),
     isListLoading: get(state, "comments.list.loading"),  
   };
 }

@@ -15,17 +15,14 @@ const initialState = {
 }
 
 export const getPersonsData = (model) => {
-    console.log("+++++++++++Response");
     return (dispatch) => {
         dispatch(getListActions.started());
         PersonsChartService.getPersons(model)
             .then((response) => {
-                console.log("+++++++++++Response", response);
-                dispatch(getListActions.success(response.data));               
+                dispatch(getListActions.success(response));               
             }, err=> { throw err; })
             .catch(err=> {
-                console.log("+++++++++++catch");
-              dispatch(getListActions.failed(err.response));
+              dispatch(getListActions.failed(err));
             });
     }
 }
@@ -37,17 +34,15 @@ export const getListActions = {
         }
     },  
     success: (data) => {
-        console.log("+++++++++++Data", data);
         return {
             type: PERSONS_SUCCESS,
             payload: data
         }
     },  
-    failed: (response) => {
-        console.log("failed: (response)", response);
+    failed: (error) => {
         return {           
             type: PERSONS_FAILED,
-            //errors: response.data
+            errors: error
         }
     }
   }
@@ -67,9 +62,7 @@ export const personsChartReducer = (state = initialState, action) => {
           newState = update.set(state, 'list.loading', false);
           newState = update.set(newState, 'list.failed', false);
           newState = update.set(newState, 'list.success', true);
-          newState = update.set(newState, 'list.data', action.payload);
-          console.log("REGISTER_SHEDULE_SUCCESS)", action.payload);
-
+          newState = update.set(newState, 'list.data', action.payload);         
           break;
       }
       case PERSONS_FAILED: {
